@@ -5,11 +5,14 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 from models import Usuario, Categoria, MetodoPago  # Importa tus modelos
+from routes.history import history_bp
 
 app = Flask(__name__)
 
 # Configurar la base de datos y otras configuraciones
 app.config.from_object(Config)
+
+app.register_blueprint(history_bp)
 
 # Inicializar las extensiones
 db.init_app(app)

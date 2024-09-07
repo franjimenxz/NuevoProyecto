@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Transacciones{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Historial de Ingresos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Importe</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingreso in ingresos %}
+            <tr>
+                <td>{{ ingreso.descripcion }}</td>
+                <td>${{ ingreso.importe }}</td>
+                <td>{{ ingreso.fecha }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('history.delete_ingreso', id=ingreso.codigo) }}">
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Historial de Egresos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Importe</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for egreso in egresos %}
+            <tr>
+                <td>{{ egreso.descripcion }}</td>
+                <td>${{ egreso.importe }}</td>
+                <td>{{ egreso.fecha }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('history.delete_egreso', id=egreso.codigo) }}">
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

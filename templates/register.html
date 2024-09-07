@@ -3,31 +3,45 @@
 {% block title %}Registrar{% endblock %}
 
 {% block content %}
-<h2>Registrar</h2>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <div>
-        {{ form.usuario.label }}<br>
-        {{ form.usuario(class="form-control") }}
-    </div>
-    <div>
-        {{ form.nombre.label }}<br>
-        {{ form.nombre(class="form-control") }}
-    </div>
-    <div>
-        {{ form.dni.label }}<br>
-        {{ form.dni(class="form-control") }}
-    </div>
-    <div>
-        {{ form.contrasena.label }}<br>
-        {{ form.contrasena(class="form-control") }}
-    </div>
-    <div>
-        {{ form.confirmar_contrasena.label }}<br>
-        {{ form.confirmar_contrasena(class="form-control") }}
-    </div>
-    <div>
-        {{ form.submit(class="btn btn-primary") }}
-    </div>
-</form>
+<div class="container" style="max-width: 400px; margin-top: 50px;">
+    <h2>Registrar</h2>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            {{ form.usuario.label }}<br>
+            {{ form.usuario(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.nombre.label }}<br>
+            {{ form.nombre(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.dni.label }}<br>
+            {{ form.dni(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.contrasena.label }}<br>
+            {{ form.contrasena(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.confirmar_contrasena.label }}<br>
+            {{ form.confirmar_contrasena(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-block") }}
+        </div>
+
+        <!-- Agregar enlace para redirigir al inicio de sesión -->
+        <div class="form-group text-center">
+            <p>¿Ya tienes una cuenta? <a href="{{ url_for('auth.login') }}" class="btn btn-link">Iniciar Sesión</a></p>
+        </div>
+    </form>
+</div>
 {% endblock %}
