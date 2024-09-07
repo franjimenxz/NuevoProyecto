@@ -37,8 +37,8 @@ PostgreSQL: Sistema de gestión de bases de datos relacional.
 
 # Instalación y Configuración
 ## 1. Clonar el repositorio 
-git clone https://github.com/usuario/proyecto-finanzas.git
-cd proyecto-finanzas
+git clone https://github.com/franjimenxz/NuevoProyecto.git
+cd NuevoProyecto
 
 ## 2. Crear un entorno virtual
 python -m venv venv
