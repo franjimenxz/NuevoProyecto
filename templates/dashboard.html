@@ -6,6 +6,15 @@
 <div class="container">
     <h2>Resumen de Finanzas</h2>
 
+    <!-- Formulario para seleccionar la fecha -->
+    <form method="GET" action="{{ url_for('dashboard.index') }}">
+        <div class="form-group">
+            <label for="fecha">Seleccionar Fecha:</label>
+            <input type="date" id="fecha" name="fecha" value="{{ fecha }}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </form>
+
     <div class="totales row">
         <div class="col-md-4">
             <p>Total Ingresos: <strong>${{ ingresos }}</strong></p>
