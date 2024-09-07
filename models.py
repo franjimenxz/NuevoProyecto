@@ -11,7 +11,7 @@ class Usuario(UserMixin, db.Model):
     usuario = db.Column(db.String(255), unique=True, nullable=False)
     contrasena = db.Column(db.String(255), nullable=False)
     tipo_usuario = db.Column(db.String(50), nullable=False)
-
+    rol = db.Column(db.String(50), nullable=False, default='usuario')  # Nuevo campo para roles
     # Método para hashear la contraseña
     def set_password(self, password):
         self.contrasena = generate_password_hash(password)
