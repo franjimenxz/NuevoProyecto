@@ -5,20 +5,24 @@ from extensions import db
 
 class Usuario(UserMixin, db.Model):
     __tablename__ = 'usuarios'
-    legajo = db.Column(db.Integer, primary_key=True)
+    legajo = db.Column(db.Integer, primary_key=True)  # Clave primaria
     nombre = db.Column(db.String(255), nullable=False)
     dni = db.Column(db.String(20), unique=True, nullable=False)
     usuario = db.Column(db.String(255), unique=True, nullable=False)
-    contrasena = db.Column(db.String(255), nullable=False)  # Esta debe almacenarse con hashing
-    nroCuenta = db.Column(db.Float)
-    tipo_usuario = db.Column(db.String(50), nullable=False)  # 'admin', 'usuario'
+    contrasena = db.Column(db.String(255), nullable=False)
+    tipo_usuario = db.Column(db.String(50), nullable=False)
 
-    # Métodos para hashing de la contraseña
+    # Método para hashear la contraseña
     def set_password(self, password):
         self.contrasena = generate_password_hash(password)
     
+    # Método para verificar la contraseña
     def check_password(self, password):
         return check_password_hash(self.contrasena, password)
+
+    # Método que devuelve el identificador del usuario
+    def get_id(self):
+        return str(self.legajo)  # Devuelve el legajo como identificador del usuario
 
 class Categoria(db.Model):
     __tablename__ = 'categorias'
@@ -34,8 +38,9 @@ class MetodoPago(db.Model):
 class Ingreso(db.Model):
     __tablename__ = 'ingresos'
     codigo = db.Column(db.Integer, primary_key=True)
-    idCategoria = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
-    legajoUsuario = db.Column(db.Integer, db.ForeignKey('usuarios.legajo'), nullable=False)
+    idcategoria = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
+    categoria = db.relationship('Categoria', backref='ingresos')  # Relación con Categoria
+    legajousuario = db.Column(db.Integer, db.ForeignKey('usuarios.legajo'), nullable=False)
     descripcion = db.Column(db.String(255))
     fecha = db.Column(db.Date, default=datetime.utcnow)
     hora = db.Column(db.Time, default=datetime.utcnow)
@@ -44,8 +49,9 @@ class Ingreso(db.Model):
 class Egreso(db.Model):
     __tablename__ = 'egresos'
     codigo = db.Column(db.Integer, primary_key=True)
-    idCategoria = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
-    legajoUsuario = db.Column(db.Integer, db.ForeignKey('usuarios.legajo'), nullable=False)
+    idcategoria = db.Column(db.Integer, db.ForeignKey('categorias.id'), nullable=False)
+    categoria = db.relationship('Categoria', backref='egresos')  # Relación con Categoria
+    legajousuario = db.Column(db.Integer, db.ForeignKey('usuarios.legajo'), nullable=False)
     descripcion = db.Column(db.String(255))
     fecha = db.Column(db.Date, default=datetime.utcnow)
     hora = db.Column(db.Time, default=datetime.utcnow)

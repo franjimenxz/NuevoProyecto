@@ -18,5 +18,6 @@ class LoginForm(FlaskForm):
 class TransactionForm(FlaskForm):
     descripcion = TextAreaField('Descripción', validators=[DataRequired()])
     importe = FloatField('Importe', validators=[DataRequired()])
-    categoria = SelectField('Categoría', choices=[])
+    idcategoria = SelectField('Categoría', choices=[])  # Cambiar nombre de 'categoria' a 'idcategoria'
     submit = SubmitField('Agregar')
+
