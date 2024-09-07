@@ -47,8 +47,8 @@ def add_expense():
             descripcion=form.descripcion.data,
             importe=form.importe.data,
             idcategoria=form.idcategoria.data,
-            idMetodoPago=form.idmetodopago.data,  # Solo se usa en egresos
-            legajousuario=current_user.id
+            idMetodoPago=form.idmetodopago.data,
+            legajousuario=current_user.legajo  # Usar el campo correcto para el usuario
         )
         db.session.add(nuevo_egreso)
         db.session.commit()
