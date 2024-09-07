@@ -1,7 +1,7 @@
-Proyecto de Gestión Financiera Web
+#Proyecto de Gestión Financiera Web
 Este proyecto es una aplicación web de gestión financiera que permite a los usuarios registrar y gestionar sus ingresos y egresos, con el objetivo de tener un control completo sobre sus finanzas personales. La aplicación también permite a los administradores gestionar a los usuarios a través de un panel de administración.
 
-Funcionalidades Principales
+##Funcionalidades Principales
 1. Registro e inicio de sesión de usuarios:
 Los usuarios pueden registrarse con un nombre de usuario, nombre completo, DNI, y contraseña.
 Luego, pueden iniciar sesión para acceder a sus datos financieros.
@@ -20,63 +20,53 @@ Los administradores pueden agregar, editar o eliminar usuarios, así como ver su
 5. Panel de administración:
 El acceso a este panel está restringido solo para administradores.
 Los administradores pueden gestionar usuarios y modificar sus roles.
-Tecnologías Utilizadas
-Backend:
+#Tecnologías Utilizadas
 
+##Backend:
 Flask: Framework para el desarrollo web.
 Flask-Login: Manejo de autenticación y sesión de usuarios.
 Flask-Migrate: Manejo de migraciones de base de datos.
 SQLAlchemy: ORM para manejar las interacciones con PostgreSQL.
-Frontend:
 
+##Frontend:
 HTML5, CSS3 y Bootstrap: Para el diseño de la interfaz.
 Chart.js: Para generar gráficos interactivos en el dashboard.
-Base de Datos:
 
+##Base de Datos:
 PostgreSQL: Sistema de gestión de bases de datos relacional.
-Instalación y Configuración
-1. Clonar el repositorio
-bash
-Copiar código
+
+#Instalación y Configuración
+##1. Clonar el repositorio 
 git clone https://github.com/usuario/proyecto-finanzas.git
 cd proyecto-finanzas
-2. Crear un entorno virtual
-bash
-Copiar código
+
+##2. Crear un entorno virtual
 python -m venv venv
 source venv/bin/activate  # En Windows: venv\Scripts\activate
-3. Instalar las dependencias
-bash
-Copiar código
+
+##3. Instalar las dependencias
 pip install -r requirements.txt
-4. Configurar la base de datos
+
+##4. Configurar la base de datos
 Crea una base de datos en PostgreSQL para el proyecto. Luego, configura el archivo config.py con las credenciales de tu base de datos:
-
-python
-Copiar código
 SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@localhost/nombre_db'
-5. Migraciones de base de datos
-Para aplicar las migraciones iniciales de la base de datos, ejecuta los siguientes comandos:
 
-bash
-Copiar código
+##5. Migraciones de base de datos
+Para aplicar las migraciones iniciales de la base de datos, ejecuta los siguientes comandos: 
 flask db init
 flask db migrate -m "Migración inicial"
 flask db upgrade
-6. Cargar usuario administrador
+
+##6. Cargar usuario administrador
 Para asignar el rol de administrador a un usuario, debes acceder a la base de datos y actualizar manualmente el campo rol a 'admin' para el usuario deseado.
 
-7. Ejecutar la aplicación
+##7. Ejecutar la aplicación
 Finalmente, ejecuta la aplicación localmente:
-
-bash
-Copiar código
 flask run
 La aplicación estará disponible en http://127.0.0.1:5000/.
 
-Estructura del Proyecto
-php
-Copiar código
+##Estructura del Proyecto
+
 project/
 │
 ├── app.py               # Archivo principal de la aplicación Flask.
@@ -98,7 +88,7 @@ project/
 └── static/              # Archivos estáticos como CSS y JS.
     ├── styles.css       # Archivo de estilos CSS.
     └── ...
-Funcionalidades Futuras
+#Funcionalidades Futuras
 Agregar la funcionalidad de exportar datos a CSV o Excel.
 Implementar reportes financieros avanzados (gráficos de tendencias, predicciones).
 Integrar con APIs de pagos para automatizar los registros de transacciones.
