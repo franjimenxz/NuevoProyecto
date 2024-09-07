@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar{% endblock %}
+
+{% block content %}
+<h2>Registrar</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.usuario.label }}<br>
+        {{ form.usuario(class="form-control") }}
+    </div>
+    <div>
+        {{ form.nombre.label }}<br>
+        {{ form.nombre(class="form-control") }}
+    </div>
+    <div>
+        {{ form.dni.label }}<br>
+        {{ form.dni(class="form-control") }}
+    </div>
+    <div>
+        {{ form.contrasena.label }}<br>
+        {{ form.contrasena(class="form-control") }}
+    </div>
+    <div>
+        {{ form.confirmar_contrasena.label }}<br>
+        {{ form.confirmar_contrasena(class="form-control") }}
+    </div>
+    <div>
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+{% endblock %}
