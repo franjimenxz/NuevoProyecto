@@ -27,6 +27,35 @@ h2 {
     color: #333;
 }
 
+.container {
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.totales {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Modificación para los gráficos */
+.chart-container {
+    position: relative;
+    height: 300px;  /* Altura fija para los gráficos */
+    width: 100%;
+    max-width: 500px;  /* Ancho máximo para mantener un buen diseño */
+    margin: 0 auto;
+}
+
+canvas {
+    display: block;
+    height: 100% !important;  /* Asegura que el gráfico llene su contenedor */
+    width: 100% !important;  /* Asegura que el gráfico llene su contenedor */
+}
+
 .form-control {
     width: 100%;
     padding: 10px;

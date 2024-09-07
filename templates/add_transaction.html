@@ -23,6 +23,14 @@
             {{ form.idcategoria.label }}<br>
             {{ form.idcategoria(class="form-control") }}
         </div>
+        
+        <!-- Solo mostrar el campo de método de pago si está presente -->
+        {% if form.idmetodopago %}
+        <div class="form-group">
+            {{ form.idmetodopago.label }}<br>
+            {{ form.idmetodopago(class="form-control") }}
+        </div>
+        {% endif %}        
 
         <div class="form-group">
             {{ form.submit(class="btn btn-primary") }}
@@ -30,3 +38,4 @@
     </form>
 </div>
 {% endblock %}
+

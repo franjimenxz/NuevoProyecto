@@ -15,9 +15,16 @@ class LoginForm(FlaskForm):
     contrasena = PasswordField('Contraseña', validators=[DataRequired()])
     submit = SubmitField('Iniciar Sesión')
 
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, FloatField, SelectField, TextAreaField
+from wtforms.validators import DataRequired
+
 class TransactionForm(FlaskForm):
     descripcion = TextAreaField('Descripción', validators=[DataRequired()])
     importe = FloatField('Importe', validators=[DataRequired()])
-    idcategoria = SelectField('Categoría', choices=[])  # Cambiar nombre de 'categoria' a 'idcategoria'
+    idcategoria = SelectField('Categoría', choices=[], validators=[DataRequired()])
+    
+    # Campo opcional para método de pago
+    idmetodopago = SelectField('Método de Pago', choices=[], validators=[], render_kw={"optional": True})  # Sin validador requerido
+    
     submit = SubmitField('Agregar')
-
