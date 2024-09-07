@@ -64,30 +64,8 @@ Para asignar el rol de administrador a un usuario, debes acceder a la base de da
 Finalmente, ejecuta la aplicación localmente:
 flask run
 La aplicación estará disponible en http://127.0.0.1:5000/.
+es.css     # Archivo de estilos CSS.
 
-## Estructura del Proyecto
-
-project/
-│
-├── app.py               # Archivo principal de la aplicación Flask.
-├── config.py            # Configuración de la aplicación.
-├── extensions.py        # Inicialización de las extensiones (db, login_manager, etc.).
-├── models.py            # Definición de los modelos de la base de datos.
-├── forms.py             # Definición de los formularios.
-├── routes/
-│   ├── auth.py          # Rutas de autenticación (registro, login).
-│   ├── dashboard.py     # Rutas para el dashboard de usuario.
-│   ├── transactions.py  # Rutas para manejar transacciones (ingresos/egresos).
-│   └── admin.py         # Rutas para el panel de administración.
-├── migrations/          # Directorio de migraciones de base de datos.
-├── templates/           # Directorio de templates HTML.
-│   ├── base.html        # Template base.
-│   ├── dashboard.html   # Template del dashboard.
-│   ├── add_transaction.html  # Template para agregar transacciones.
-│   └── ...              # Otros templates.
-└── static/              # Archivos estáticos como CSS y JS.
-    ├── styles.css       # Archivo de estilos CSS.
-    └── ...
 # Funcionalidades Futuras
 Agregar la funcionalidad de exportar datos a CSV o Excel.
 Implementar reportes financieros avanzados (gráficos de tendencias, predicciones).
