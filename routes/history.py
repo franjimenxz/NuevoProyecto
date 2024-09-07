@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from extensions import db
 from models import Ingreso, Egreso
-from flask_login import current_user
+from flask_login import login_required,current_user
 
 history_bp = Blueprint('history', __name__)
 
 @history_bp.route('/history', methods=['GET'])
+@login_required
 def show_history():
     ingresos = Ingreso.query.filter_by(legajousuario=current_user.legajo).all()
     egresos = Egreso.query.filter_by(legajousuario=current_user.legajo).all()
