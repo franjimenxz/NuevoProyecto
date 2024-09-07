@@ -24,13 +24,13 @@
             {{ form.idcategoria(class="form-control") }}
         </div>
         
-        <!-- Solo mostrar el campo de método de pago si está presente -->
-        {% if form.idmetodopago %}
+        <!-- Solo mostrar método de pago si es un egreso -->
+        {% if tipo_transaccion == 'Egreso' %}
         <div class="form-group">
             {{ form.idmetodopago.label }}<br>
             {{ form.idmetodopago(class="form-control") }}
         </div>
-        {% endif %}        
+        {% endif %}
 
         <div class="form-group">
             {{ form.submit(class="btn btn-primary") }}
@@ -38,4 +38,5 @@
     </form>
 </div>
 {% endblock %}
+
 
