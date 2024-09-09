@@ -12,23 +12,23 @@ def index():
     # Obtener la fecha seleccionada del formulario (si existe)
     fecha_seleccionada = request.args.get('fecha')
 
-    # Obtener los ingresos y egresos totales para el usuario actual
+    # Inicializar variables para ingresos y egresos filtrados por día
+    ingresos_dia = 0
+    egresos_dia = 0
+
+    # Obtener los ingresos y egresos totales generales
     ingresos_totales = db.session.query(func.sum(Ingreso.importe)).filter_by(legajousuario=current_user.legajo).scalar() or 0
     egresos_totales = db.session.query(func.sum(Egreso.importe)).filter_by(legajousuario=current_user.legajo).scalar() or 0
 
-    # Filtrar ingresos y egresos por día
+    # Filtrar ingresos y egresos por día si la fecha está seleccionada
     if fecha_seleccionada:
-        ingresos = db.session.query(Ingreso).filter_by(legajousuario=current_user.legajo).filter(func.date(Ingreso.fecha) == fecha_seleccionada).all()
-        egresos = db.session.query(Egreso).filter_by(legajousuario=current_user.legajo).filter(func.date(Egreso.fecha) == fecha_seleccionada).all()
-    else:
-        ingresos = db.session.query(Ingreso).filter_by(legajousuario=current_user.legajo).all()
-        egresos = db.session.query(Egreso).filter_by(legajousuario=current_user.legajo).all()
+        ingresos_dia = db.session.query(func.sum(Ingreso.importe)).filter_by(legajousuario=current_user.legajo).filter(func.date(Ingreso.fecha) == fecha_seleccionada).scalar() or 0
+        egresos_dia = db.session.query(func.sum(Egreso.importe)).filter_by(legajousuario=current_user.legajo).filter(func.date(Egreso.fecha) == fecha_seleccionada).scalar() or 0
 
-    # Agrupar ingresos y egresos por día
-    ingresos_por_dia = db.session.query(func.date(Ingreso.fecha), func.sum(Ingreso.importe)).filter_by(legajousuario=current_user.legajo).group_by(func.date(Ingreso.fecha)).all()
-    egresos_por_dia = db.session.query(func.date(Egreso.fecha), func.sum(Egreso.importe)).filter_by(legajousuario=current_user.legajo).group_by(func.date(Egreso.fecha)).all()
+    # Datos por categoría para los gráficos (de todos los ingresos/egresos, sin filtrar por fecha)
+    ingresos = db.session.query(Ingreso).filter_by(legajousuario=current_user.legajo).all()
+    egresos = db.session.query(Egreso).filter_by(legajousuario=current_user.legajo).all()
 
-    # Datos por categoría para los gráficos
     ingresos_por_categoria = {}
     for ingreso in ingresos:
         categoria = ingreso.categoria.nombre
@@ -47,11 +47,11 @@ def index():
 
     return render_template(
         'dashboard.html',
-        ingresos=ingresos_totales,
-        egresos=egresos_totales,
+        ingresos_totales=ingresos_totales,
+        egresos_totales=egresos_totales,
+        ingresos_dia=ingresos_dia,
+        egresos_dia=egresos_dia,
         ingresos_por_categoria=ingresos_por_categoria,
         egresos_por_categoria=egresos_por_categoria,
-        ingresos_por_dia=ingresos_por_dia,
-        egresos_por_dia=egresos_por_dia,
         fecha=fecha_seleccionada
     )

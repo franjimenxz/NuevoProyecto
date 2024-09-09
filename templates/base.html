@@ -1,20 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <nav>
-        <a href="{{ url_for('dashboard.index') }}">Dashboard</a>
-        <a href="{{ url_for('transactions.add_income') }}">Agregar Ingreso</a>
-        <a href="{{ url_for('transactions.add_expense') }}">Agregar Egreso</a>
-        <a href="{{ url_for('history.show_history') }}">Historial</a>
-        <a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a>
-    </nav>
-    <div>
-        {% block content %}{% endblock %}
+    <div class="wrapper">
+        <!-- Botón para abrir/cerrar el nav -->
+        <button id="navToggle" class="btn-toggle">
+            ☰
+        </button>
+
+        <nav id="sidebar">
+            <ul>
+                <li><a href="{{ url_for('dashboard.index') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('transactions.add_income') }}">Agregar Ingreso</a></li>
+                <li><a href="{{ url_for('transactions.add_expense') }}">Agregar Egreso</a></li>
+                <li><a href="{{ url_for('history.show_history') }}">Historial</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
     </div>
+
+    <!-- JavaScript para abrir/cerrar el nav -->
+    <script>
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
+

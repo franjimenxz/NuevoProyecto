@@ -1,0 +1,111 @@
+/* auth_styles.css */
+
+body {
+    margin-top: 20px;
+    background-color: #f4f7fa; /* Fondo claro para resaltar el formulario */
+    font-family: 'Roboto', sans-serif; /* Tipografía más moderna */
+}
+
+/* Fondo de la página con imagen */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../img/image.png'); /* Cambia la ruta si es necesario */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+/* Estilos para el formulario */
+.card {
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    background-color: #fff; /* Fondo blanco para resaltar */
+    border-radius: 15px;
+    border: none; /* Eliminar borde */
+    color: #333; /* Texto en gris oscuro */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Efecto hover sobre el formulario */
+.card:hover {
+    transform: translateY(-10px); /* Leve desplazamiento */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Más sombra al pasar por encima */
+}
+
+/* Estilo del título */
+h2 {
+    color: #064c82; /* Color principal */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Estilos para los input fields */
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 8px; /* Borde redondeado */
+    padding: 12px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto en los inputs al recibir foco */
+.form-control:focus {
+    border-color: #064c82;
+    box-shadow: 0 0 5px rgba(6, 76, 130, 0.4);
+}
+
+/* Botones de acción */
+.btn-success {
+    background-color: #28a745; /* Verde principal */
+    border-color: #28a745;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 150px; /* Ancho fijo para uniformidad */
+}
+
+/* Botones al pasar el mouse */
+.btn-success:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra más profunda en hover */
+}
+
+/* Estilos para enlaces */
+.btn-link {
+    color: #064c82; /* Azul oscuro para los enlaces */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Enlaces en hover */
+.btn-link:hover {
+    color: #003366; /* Color más oscuro en hover */
+    text-decoration: underline; /* Subrayado en hover */
+}
+
+/* Ajustes de texto en el formulario */
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Centrando el contenido */
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vh-100 {
+    height: 100vh;
+}

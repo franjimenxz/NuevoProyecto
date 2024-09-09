@@ -1,4 +1,4 @@
-#!C:\Users\usuario\OneDrive\Escritorio\NewProject\venv\Scripts\python.exe
+#!C:\Users\usuario\OneDrive\Escritorio\analisisgastos\Grupo5Desarrollo24\venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'pi==0.1.2','console_scripts','easy_uninstall'
 import re
 import sys
