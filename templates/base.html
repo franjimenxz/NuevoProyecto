@@ -21,7 +21,15 @@
                 <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesión</a></li>
             </ul>
         </nav>
+
         <div class="main-content">
+            <!-- Contenedor del nombre del usuario en la esquina superior derecha -->
+            <div class="user-info">
+                <div class="user-button">
+                    {{ current_user.usuario }} <!-- Aquí mostramos el nombre del usuario logueado -->
+                </div>
+            </div>
+            
             {% block content %}{% endblock %}
         </div>
     </div>
@@ -34,4 +42,3 @@
     </script>
 </body>
 </html>
-

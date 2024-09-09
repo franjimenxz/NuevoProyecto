@@ -3,6 +3,8 @@ from flask_login import login_user, logout_user
 from forms import RegisterForm, LoginForm
 from models import Usuario
 from extensions import db, login_manager  # Cambia esto
+from sqlalchemy.exc import IntegrityError
+
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -18,22 +20,32 @@ def register():
         )
         nuevo_usuario.set_password(form.contrasena.data)
         db.session.add(nuevo_usuario)
-        db.session.commit()
-        flash('Usuario registrado exitosamente', 'success')
-        return redirect(url_for('auth.login'))
+        try:
+            db.session.commit()
+            flash('Usuario registrado exitosamente', 'success')
+            return redirect(url_for('auth.login'))
+        except IntegrityError:
+            db.session.rollback()
+            flash('El usuario o DNI ya existen. Por favor, elige otros.', 'register_error')
+
     return render_template('register.html', form=form)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        usuario = Usuario.query.filter_by(usuario=form.usuario.data).first()
-        if usuario and usuario.check_password(form.contrasena.data):
-            login_user(usuario)
-            return redirect(url_for('dashboard.index'))
-        else:
-            flash('Usuario o contraseña incorrectos', 'danger')
+        # Lógica de autenticación
+        user = Usuario.query.filter_by(usuario=form.usuario.data).first()
+        if user is None or not user.check_password(form.contrasena.data):
+            flash('Usuario o contraseña incorrectos', 'login_error')
+            return redirect(url_for('auth.login'))
+
+        # Si el login es exitoso
+        login_user(user)
+        return redirect(url_for('dashboard.index'))
+
     return render_template('login.html', form=form)
+
 
 @auth_bp.route('/logout')
 def logout():

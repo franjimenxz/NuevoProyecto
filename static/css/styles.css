@@ -105,14 +105,43 @@ h2 {
     transform: translateY(-3px);  /* Efecto de flotación en hover */
 }
 
-/* Chart container */
-.chart-container {
-    position: relative;
-    height: 300px;
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
+/* Estilos para los gráficos lado a lado */
+@media (min-width: 768px) {
+    .col-md-6 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;  /* Ocupa el 50% del ancho del contenedor */
+    }
+
+    .chart-container {
+        height: 400px;  /* Ajusta la altura de los gráficos */
+        width: 400px;   /* Ajusta el ancho de los gráficos */
+        max-width: 100%; /* Asegúrate de que el gráfico se ajuste dentro del contenedor */
+    }
 }
+
+/* Para asegurar que los gráficos se alineen correctamente */
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Ajustar el gráfico de barras para que ocupe más ancho */
+.chart-container.barras {
+    width: 100%; /* Ocupar todo el ancho disponible */
+    max-width: 100%; /* Limitar el máximo a todo el contenedor */
+    height: 400px; /* Aumentar la altura si es necesario */
+}
+
+/* Mantener el tamaño de los gráficos de categoría */
+.chart-container.donut {
+    width: 50%; /* Mantener el 50% del espacio disponible */
+    max-width: 50%;
+    height: 300px; /* Puedes ajustar la altura si es necesario */
+    display: inline-block; /* Asegurarte de que estén uno al lado del otro */
+}
+
 
 canvas {
     display: block;
@@ -263,3 +292,76 @@ nav.active ~ .main-content {
     margin-left: 250px;
     transition: margin-left 0.3s ease;
 }
+/* Estilo para el contenedor del nombre de usuario */
+.user-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-size: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para el rectángulo con bordes redondeados donde aparece el nombre del usuario */
+.user-rectangle {
+    background-color: #007bff;  /* Color de fondo del rectángulo */
+    color: white;
+    border-radius: 12px;  /* Bordes redondeados */
+    padding: 10px 20px;  /* Espacio interior */
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Sombra */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 100px;  /* Ancho mínimo para el texto */
+}
+
+/* Estilo para el contenedor del nombre de usuario con efecto de sombra y bordes redondeados */
+.user-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-size: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo del botón con efecto diagonal y fondo degradado */
+.user-button {
+    background-color: #007bff; /* Color base */
+    color: white;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra del botón */
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto diagonal en el fondo del botón */
+.user-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    pointer-events: none;
+}
+
+/* Efecto hover para el botón */
+.user-button:hover {
+    background-color: #007bff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra más intensa al hacer hover */
+}
+

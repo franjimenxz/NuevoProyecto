@@ -45,24 +45,39 @@
         </div>
     </div>
 
-    <h3>Gráficos</h3>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="chart-container">
-                <canvas id="balanceChart"></canvas>
+    <div class="container">
+        <h3>Gráficos</h3>
+    
+        <div class="row2">
+            <!-- Gráfico de balance general -->
+            <div class="col-md-12">
+                <div class="chart-container barras">
+                    <canvas id="balanceChart"></canvas>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="chart-container">
-                <canvas id="ingresosCategoriaChart"></canvas>
+    
+        <div class="row">
+            <!-- Gráfico de ingresos por categoría -->
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="ingresosCategoriaChart"></canvas>
+                </div>
+            </div>
+    
+            <!-- Gráfico de egresos por categoría -->
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="egresosCategoriaChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    // Gráfico de balance general (Ingresos vs Egresos)
     var ctxBalance = document.getElementById('balanceChart').getContext('2d');
     var balanceChart = new Chart(ctxBalance, {
         type: 'bar',
@@ -83,6 +98,54 @@
                     beginAtZero: true
                 }
             },
+            plugins: {
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+
+    // Gráfico de ingresos por categoría
+    var ctxIngresosCategoria = document.getElementById('ingresosCategoriaChart').getContext('2d');
+    var ingresosCategoriaChart = new Chart(ctxIngresosCategoria, {
+        type: 'doughnut',
+        data: {
+            labels: [{% for categoria in ingresos_por_categoria.keys() %}'{{ categoria }}',{% endfor %}],
+            datasets: [{
+                label: 'Ingresos por Categoría',
+                data: [{% for total in ingresos_por_categoria.values() %}{{ total }}, {% endfor %}],
+                backgroundColor: ['#4caf50', '#2196f3', '#ffeb3b', '#ff9800'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+
+    // Gráfico de egresos por categoría
+    var ctxEgresosCategoria = document.getElementById('egresosCategoriaChart').getContext('2d');
+    var egresosCategoriaChart = new Chart(ctxEgresosCategoria, {
+        type: 'doughnut',
+        data: {
+            labels: [{% for categoria in egresos_por_categoria.keys() %}'{{ categoria }}',{% endfor %}],
+            datasets: [{
+                label: 'Egresos por Categoría',
+                data: [{% for total in egresos_por_categoria.values() %}{{ total }}, {% endfor %}],
+                backgroundColor: ['#f44336', '#ff9800', '#4caf50', '#2196f3'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     display: true
