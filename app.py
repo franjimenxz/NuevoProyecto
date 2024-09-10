@@ -1,17 +1,14 @@
 from flask import Flask
 from extensions import db, migrate, login_manager
 from config import Config
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-from flask_login import current_user
-from models import Usuario, Categoria, MetodoPago  # Importa tus modelos
+from admin.views import initialize_admin  # Importar la configuración del panel de admin
 from routes.history import history_bp
-
+from extensions import db
 app = Flask(__name__)
 
 # Configurar la base de datos y otras configuraciones
 app.config.from_object(Config)
-
+# Asegúrate de registrar el blueprint en tu aplicación
 app.register_blueprint(history_bp)
 
 # Inicializar las extensiones
@@ -20,18 +17,8 @@ migrate.init_app(app, db)
 login_manager.init_app(app)
 login_manager.login_view = 'auth.login'
 
-# Clase personalizada para proteger el acceso al panel de administración
-class AdminView(ModelView):
-    def is_accessible(self):
-        return current_user.is_authenticated and current_user.rol == 'admin'  # Verifica que sea admin
-
-# Inicializa Flask-Admin
-admin = Admin(app, name='Admin Panel', template_mode='bootstrap4')
-
-# Agrega los modelos que quieres gestionar en el panel de administración
-admin.add_view(AdminView(Usuario, db.session))
-admin.add_view(AdminView(Categoria, db.session))
-admin.add_view(AdminView(MetodoPago, db.session))
+# Inicializa el panel de administración
+initialize_admin(app)
 
 # Importar y registrar Blueprints
 from routes.auth import auth_bp
